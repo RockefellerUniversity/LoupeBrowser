@@ -283,7 +283,9 @@ We are looking for clearly defined clusters. For this we need easily distinguish
 
 We don't want an inkblot with indistinguishable/overlapping cluster assignments. 
 
-![overview](./imgs/bad_cluster.png)
+```{r, out.width = "70%", echo=F}
+knitr::include_graphics("./imgs/bad_cluster.png")
+```
 
 ---
 ## Clustering
@@ -382,7 +384,10 @@ Once we have some understanding of our data we may want to start do some specifi
 
 Let's look at Cluster 1 vs Cluster 6. To do this we select just those clusters and click *Run Differential* then *Between Selected Clusters*.
 
-![overview](./imgs/diff.png)
+```{r, out.width = "70%", echo=F}
+knitr::include_graphics("./imgs/diff.png")
+```
+
 
 ---
 ## Pairwise Comparisons
@@ -826,10 +831,10 @@ Hopefully we have shown you that you can complete a number of task with relative
 ---
 ## Time for an exercise!
 
-Exercises found [here](../../exercises/exercises/MyExercise1_exercises.html)
+Exercises found [here](../../exercises/exercises/Exercise_exercises.html)
 
 ---
 ## Answers to exercise
 
-Answers can be found [here](../../exercises/answers/MyExercise1_answers.html)
+Answers can be found [here](../../exercises/answers/Exercise_answers.html)
 
