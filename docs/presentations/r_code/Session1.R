@@ -63,6 +63,10 @@ if(params$isSlides == "yes"){
 
 
 ## ----out.width = "70%", echo=F------------------------------------------------
+knitr::include_graphics("./imgs/bad_cluster.png")
+
+
+## ----out.width = "70%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/custom_Group.png")
 
 
@@ -86,6 +90,10 @@ if(params$isSlides == "yes"){
   
 }
 
+
+
+## ----out.width = "70%", echo=F------------------------------------------------
+knitr::include_graphics("./imgs/diff.png")
 
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
