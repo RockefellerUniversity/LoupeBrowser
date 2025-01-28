@@ -1,5 +1,5 @@
 ---
-title: "My Exercise 1"
+title: "Loupe Browser Exercise"
 author: "Rockefeller University, Bioinformatics Resource Centre"
 date: "https://rockefelleruniversity.github.io/RU_course_template/"
 output: 
@@ -14,24 +14,123 @@ params:
 ```{r, setup,include=FALSE}
 toMessage <- ifelse(!is.null(params$toMessage),params$toMessage,FALSE)
 message(toMessage)
+
 ```
 
 
 <p>&nbsp;</p>
-These exercises are about ??Add a summary of the topic?? [??Topic Name??](https://rockefelleruniversity.github.io/RU_course_template/). 
+These exercises are about [Loupe Browser] (https://rockefelleruniversity.github.io/LoupeBrowser/). 
 
-**Exercise 1** - **??Ex 1 title if it has one??**
+**Exercise 1** - **Loading Files**
 
-- ??What is the first question??
+- For this exercise will use a 10X dataset
+  * 5k Human PBMCs (Donor 1) with Automated Cell Annotation
+  * It is a human dataset, from blood that was cryopreserved
+  * Start off at the [10X datasets](https://www.10xgenomics.com/datasets/) page
+
+```{R, echo=F}
+knitr::include_graphics("./imgs/10x.png")
+```
+
+- Load in the data
+  * Review various the groups i.e. clusters, annotation etc
+  * Can you see the difference in how Kmeans and Graph-based clustering have performed?
+  * Check the UMAP as well
+  * Use split view to help check what cell types are most prevalent
+  
+
+```{R, echo=F}
+knitr::include_graphics("./imgs/newdata.png")
+```
+
 ```{r,echo=toMessage}
-## Add the solution in here. This will only be included in the exercise sections. This is controlled by the echo=toMessage in the markdown header  ie:
+# It looks like Kmeans cannot differentiate more than one group.
+# Graph clustering gives better resolution.
 
-cat("Hello World")
+#  T Cells, Monocytes and Macrophages seem the most prevalent
+```
 
-a<-1+2
-b<-3+4
+**Exercise 2** - **Differential Analysis**
 
-mean(a,b)
+- Markers
+  * Cluster 6 sticks out as being the most distinct cluster. What genes are driving this?
+  * Check how these markers look using the Feature tab and the violin plots
+  * Cluster 3 has a strong hit - HBB. But there is an issue with this hit. What is it?
+
+
+```{R, echo=F}
+knitr::include_graphics("./imgs/diff_ex.png")
+```
+
+```{r,echo=toMessage}
+# Looks like cluster 6 is associated with several Ig genes like IGHD and IGLC2
+
+# Only one cell is driving HBB expression. This is the hemoglobin gene so maybe its a RBC. It is annotated as a hematopoeitic cell, but we can see there are a mixture of cell types annotated in this part of UMAP. 
+```
+
+- Pairwise Comparison
+  * Let's compare Cluster 6 to Cluster 1
+  * Review the top hits. Do they make sense?
+
+```{r,echo=toMessage}
+# Based on the annotation this is a comparison between T and B cells. The results should reflect this
+# i.e. the top hits in cluster 6 are MS4A1 and BANK1 which are known markers of B cells
+
 
 ```
-Answers can be found
+
+```{R, echo=F}
+knitr::include_graphics("./imgs/tophit.png")
+```
+
+**Exercise 3** - **Features and Filters**
+
+- Features
+  * Double check some mitochondrial genes (they start with MT). Are there any problems there?
+  * Check some known PBMC marker genes. You can manually try these or import the list from *LoupeBrowser/r_course/data/pbmc_markers.csv*:
+  
+CD3E: For T cells. 
+CD79A: For B cells. 
+NKG7: For NK cells. 
+LY6C62: For monocytes or dendritic cells (DC). 
+C1QA: For macrophage. 
+FCER1A: For basophil. 
+HBA1: For erythrocytes (RBC). 
+
+```{r,echo=toMessage}
+# There is a mild asymmetry in MT so again something to keep an eye on, but it doesn't look too bad. 
+
+```
+
+- Custom Groups
+
+* There are two minor groups of cells that seem to have a mixed cluster annotation. Use freehand selection to create two groups. Look for Markers.
+
+```{r,echo=toMessage}
+# One cluster's top hits are TUBB1 and CAVIN2. These are platelet markers. But the annotation currently says hematopoeitic cell. 
+
+# The other cluster is a little more complex - with a mixture of identities including DC, erythrocytes and rare sub classes of T-cell.
+
+```
+
+- Filters
+* Lets find some Regulatory T cells. These should have IL2RA and FOXP3. 
+* What cluster are they predominately found in?
+* Does that cluster make sense? Go back and check its marker genes.
+
+```{r,echo=toMessage}
+# Seems like there is a streak of Treg cells.
+# There is a hub in cluster 10
+# Reviewing the cluster markers the top hit is RTKN2 which is associated with Treg cells. 
+
+```
+
+- Reanalyze
+  * When we made custom groups we identified a cluster with mixed identity. This as bottom right of the UMAP with cluster 10 and cluster 4 identities. Lets reanalyze but remove this cluster as it could be the product of doublets. 
+  
+  
+  
+  
+  
+  
+  
