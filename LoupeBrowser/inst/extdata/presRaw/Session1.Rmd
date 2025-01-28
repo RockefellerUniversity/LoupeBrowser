@@ -389,7 +389,7 @@ We want to keep an eye out for problem gene families like mtRNA and rRNA as they
 ![overview](./imgs/diff.png)
 
 ---
-## Psuedobulk
+## Pseudobulk
 
 The last method is only applicable if you have replicates. Pseudobulk leverages your replicates and aggregates the information across cells to allow a more traditional bulk RNAseq statistical determination. 
 
@@ -535,12 +535,163 @@ if(params$isSlides == "yes"){
 
 ```
 
+##
+Custom Groups
+
+So far we have shown you how to make custom groups by importing gene lists into Loupe Browser. We can also create custom groups while in Loupe Browser. 
+
+We have seen allusions to this while looking at filtering of Features based on expression. 
+
+Let's filter CD3D based on a minimum expression value of 1.5.
+
+
+![overview](./imgs/min.png)
+
+---
+## Save Barcodes
+
+After we have filtered our cells we can then save these barcodes. To save them we need to:
+ - *Name the selected cluster*: What is the name of these cells? i.e. Immune
+ - *Add to new Group*: What is the type of labeling we are doing? i.e. Annotation
+
+
+![overview](./imgs/savebar.png)
+
+---
+## Save Barcodes
+
+We can now just go to the Clusters section and we will see our new Group. We can now select this. Just like we would any other cluster. 
+
+Lets try to add more cell types of interest to our *Annotation* group. Lets start by looking for fibroblasts using the VIM marker gene. 
+
+---
+##  Save Barcodes
+
+Several clusters seem to correspond to fibroblasts. We could use our threshold filtering to select these cells or we could instead use point and click selection using the *Freehand Selection* tool. Lets start by grabbing one of these clusters. 
+
+
+![overview](./imgs/savebar.png)
+
+---
+##  Save Barcodes
+
+We can add a selection to an existing group, so lets use *Freehand Selection* again to highlight the other major fibroblast group. 
+
+![overview](./imgs/savebar.png)
+
+
+---
+## Custom Groups
+
+When we go back to the Cluster tab and check our new groups we can see the two approaches have slightly different results. 
+
+As scRNAseq has dropouts the labeling of the Immune cells is a lot patchier, that said it maybe is more of an accurate representation of the original data. 
+
+![overview](./imgs/markers.png)
+
+---
+## Advanced Selection
+
+As you may have noticed there is also a dedicated pane to filtering and slecting cells based on various criteria: expression level, cluster identity etc. 
+
+To create new selection we create *Rules*. 
+
+Our Immune Cell Cd3d+ group is specifically T Cells. We could subset this using rules to find CD8+ T-cells. First we will check CD8B expression levels in the feature tab. It seems a 0.5 filter on the log2 scale is sufficient. 
+
+---
+## Advanced Selection
+
+We can then set up a rule to filter our cells based on the fact that they are in our *Immune* group *AND* also they are *CD8B+* > 0.5 log2(counts). We can even export this new selection to a group by saving barcodes. 
+
+![overview](./imgs/tcells.png)
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Reanalyze
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Reanalyze
+  
+---
+"    
+  )
+  
+}
+
+```
+
+## Reanalyze
+
+A lot of the time there are issues with the QC that need to be remedied. Most of the time this will require taking the data into R/Python to use a collection of scRNAseq tools. But Loupe Browser does allow for some optimzxation with out leaving the GUI. 
+
+The *Reanlyze* tab allows you access to custom filtering of low quality cells, clustering and dimension reduction. 
+
+---
+## Review Barcodes
+
+The first step is to review the barcodes. This allows you to filter cells that you think are bad or unnecessary, based on whatever criteria. 
+
+You can supply the barcodes you want to filter as a *.csv* or you could filter based on the groups you have made. For example if you knew you were not interested in the T-cell portion of the cells than we can filter them out. Domain-specific knowledge is important for this decision making. Whatever groups are selected on the cluster pane are included, so we ccan deselect the Clusters 1, 6 and 12. 
+
+
+![overview](./imgs/tcell_filter.png)
+
+---
+## UMI thresholds
+
+We can then customize filtering of cells based on UMI values. Often we would filter top and bottom cells as they represent doublets or empty droplets respectively. 
+
+![overview](./imgs/umi_filter.png)
+---
+## Gene thresholds
+
+Similarly we can then customize filtering of cells based on number of Genes expressed. Often we would filter top and bottom cells as they represent doublets or empty droplets respectively.
+
+![overview](./imgs/gene_filter.png)
+
+---
+## Mitochondrial UMI thresholds
+
+We will then set thresholds for the amount of mitochondrial signal. mtRNA is one of the first signs of ambient RNA contamination, and cells with high mtRNA often will confound results. 
+
+This is a human data set, so we can select the Human genome. There is also mouse as an option. If you work with a different organism you can supply the mitochondrial genes in a *.csv* format.
+
+---
+## Mitochondrial UMI thresholds
+
+We often start with a 10% cut-off (1% for snRNAseq), but if you are seeing a lot of ambientRNA you may have to be flexible around this. 
+
+
+![overview](./imgs/mt_filter.png)
+
+---
+## Reanalyze
+
+Lastly, we can decide on some of the outputs. This includes what dimension reduction to perform. So far we have just looked at tSNE, but actually UMAPs are the most popular. 
+
+You can customize some of the options used in the dimension reduction by adjusting the parameters. This allows you to control PCA, tSNE and UMAP. Generally though it is best to stick to the defualt unless you know what you're doing. 
+
+Once the analysis is given a name, we can then click *Recluster*. This may take a few minutes. 
+
+---
+## Reanalyze
+
+All our prior work is preserved but now we have some additional projections, including a UMAP.
+
+![overview](./imgs/rean.png)
+
+
 ---
 ## Working with your ow files?
 
-- selection
-- advance selection
-- reanalyze
 
 
 - Basic intro to cellranger  - waht has already ahppened to the data at a minumum. and cloupe files
@@ -559,14 +710,6 @@ if(params$isSlides == "yes"){
 - exerciseses
   * load in a previously annoteated dataset. 
   * try a freah dattaset. give some amrkers and get them to run clustering? annotate? differnetials. 
-
-
-
---
-## Exercises
-The following few slides show you how to structure exercise slides.
-
-We often have several exercise slides per session. So you can just copy and paste and change the directory to the appropriate name. All 3 file types are made from you single exercise Rmd. 
 
 ---
 ## Time for an exercise!
