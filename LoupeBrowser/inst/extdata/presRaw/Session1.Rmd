@@ -43,7 +43,8 @@ if(params$isSlides != "yes"){
 - [Course Home Page](http://rockefelleruniversity.github.io/LoupeBrowser/)
 - [Running Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/presentations/singlepage/Session1.html#Cell_Ranger3)
 
-## Materials
+---
+## Course materials
 
 Links to material and slides for this course can be found on github.
 
@@ -234,8 +235,6 @@ if(params$isSlides == "yes"){
 
 ```
 
-  
----
 ## Clustering
 
 Lets start with clustering. Cell Ranger does some basic clustering for you. It performs clustering in two ways:
@@ -245,6 +244,9 @@ Lets start with clustering. Cell Ranger does some basic clustering for you. It p
 
 The cells are colored by the Graph-Based clustering method be default. We can use the toolbar to switch easily between the two. 
 
+---
+## Clustering
+
 ![overview](./imgs/screen3.png)
 
 
@@ -253,7 +255,7 @@ The cells are colored by the Graph-Based clustering method be default. We can us
 
 - Graph-based: This is built on relationship between cells, grouping cells together based on a nearest-neighbor model.
 
-- K-means: This assigns cells to a cluster based on their distance to a pre-determined number of cluster centres. This typically leads to round clusters. 
+- K-means: This assigns cells to a cluster based on their distance to a pre-determined number of cluster centers. This typically leads to round clusters. 
 
 Generally graph-based is better for identifying more complex spatial patterns. K-means is typically simpler.
 
@@ -281,7 +283,7 @@ We are looking for clearly defined clusters. For this we need easily distinguish
 
 We don't want an inkblot with indistinguishable/overlapping cluster assignments. 
 
-![overview](./imgs/clust_down.png)
+![overview](./imgs/bad_cluster.png)
 
 ---
 ## Clustering
@@ -305,12 +307,13 @@ We can also check the distribution of these identities across our tSNE in much t
 We can add our own groups. We can do this in two ways. 
 
 1) Upload a file *.csv* containing Cell Barcodes and group information.
-  - If you downlaod the course material there is an example files in: *LoupeBrowser/r_course/data/smoke_status_metadata.csv*
+  - If you download the course material there is an example files in: *LoupeBrowser/r_course/data/smoke_status_metadata.csv*
 
 2) Manually create rules to create groups in Loupe Browser (we will show you this later)
 
-![overview](./imgs/custom_Group.png)
-
+```{r, out.width = "70%"}
+knitr::include_graphics("./imgs/custom_Group.png")
+```
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -336,7 +339,7 @@ if(params$isSlides == "yes"){
 ```
 
 
----
+
 ## Diffential Expression
 
 We can also get differential expression results from our analysis. This can be another important step in the QC of our data and start to provide insight into the biological findings. 
@@ -379,16 +382,19 @@ Once we have some understanding of our data we may want to start do some specifi
 
 Let's look at Cluster 1 vs Cluster 6. To do this we select just those clusters and click *Run Differential* then *Between Selected Clusters*.
 
-![overview](./imgs/heat.png)
+![overview](./imgs/diff.png)
 
 ---
 ## Pairwise Comparisons
 
-Again we can review results as a Feature Table or a Heatmap. This has some interesting results. There are several RPS and RPL genes. These are associated with the Ribosome and could be a sign of QC issues. 
+Again we can review results as a Feature Table or a Heatmap. This has some interesting results. There are several RPS and RPL genes. These are associated with the ribosome and could be a sign of QC issues. 
 
 We want to keep an eye out for problem gene families like mtRNA and rRNA as they could be symptomatic of technical issues with the data. We will come back to this. 
 
-![overview](./imgs/diff.png)
+---
+## Pairwise Comparisons
+
+![overview](./imgs/ribo.png)
 
 ---
 ## Pseudobulk
@@ -411,6 +417,13 @@ A separate window will pop up. We will then provide our differential design.
 2) Experimental comparison. What do you want to compare? In this case we will look at AML status. We can then select which will be A or B in our comparison. We will pick patient as A; traditionally perturbations are used as the numerator for fold change comparisons. 
 
 3) Select samples. We will just include all our samples. 
+
+---
+## Psuedobulk
+
+
+
+![overview](./imgs/pseudo.png)
 
 ---
 ## Psuedobulk
@@ -512,7 +525,10 @@ The genes we have looked at have been automatically added to a gene list. We can
 
 If you have multiple gene lists you can start to parse out complex interactions by making a co-expression plot. This shows the distribution of multiple gene lists across your tSNE. 
 
-![overview](./imgs/coexp.png)
+```{r, out.width = "70%"}
+knitr::include_graphics("./imgs/coexp.png")
+```
+
 
 ---
 ## Feature Plot
@@ -521,7 +537,10 @@ We can also cross-reference individual genes in a similar way by looking at the 
 
 We can use this to find sub populations of cells dependent on multiple markers for example: CD8+ T-cells. These will have CD3D and CD8 expression. We can also subset the cells just to clusters 1, 6 and 12 to help focus on these cells. 
 
-![overview](./imgs/cross_comparison.png)
+```{r, out.width = "70%"}
+knitr::include_graphics("./imgs/cross_comparison.png")
+```
+
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -555,7 +574,9 @@ We have seen allusions to this while looking at filtering of Features based on e
 Let's filter CD3D based on a minimum expression value of 1.5.
 
 
-![overview](./imgs/min.png)
+```{r, out.width = "70%"}
+knitr::include_graphics("./imgs/min.png")
+```
 
 ---
 ## Save Barcodes
@@ -580,14 +601,14 @@ Lets try to add more cell types of interest to our *Annotation* group. Lets star
 Several clusters seem to correspond to fibroblasts. We could use our threshold filtering to select these cells or we could instead use point and click selection using the *Freehand Selection* tool. There is also a *Draw Selection* depending on your preference. Lets start by grabbing one of these clusters. 
 
 
-![overview](./imgs/savebar.png)
+![overview](./imgs/freehand.png)
 
 ---
 ##  Save Barcodes
 
 We can add a selection to an existing group, so lets use *Freehand Selection* again to highlight the other major fibroblast group. 
 
-![overview](./imgs/savebar.png)
+![overview](./imgs/freehand2.png)
 
 ---
 ## Custom Groups
@@ -601,7 +622,7 @@ As scRNAseq has dropouts the labeling of the Immune cells is a lot patchier, tha
 ---
 ## Advanced Selection
 
-As you may have noticed there is also a dedicated pane to filtering and slecting cells based on various criteria: expression level, cluster identity etc. 
+As you may have noticed there is also a dedicated pane to filtering and selecting cells based on various criteria: expression level, cluster identity etc. 
 
 To create new selection we create *Rules*. 
 
@@ -639,17 +660,20 @@ if(params$isSlides == "yes"){
 
 ## Reanalyze
 
-A lot of the time there are issues with the QC that need to be remedied. Most of the time this will require taking the data into R/Python to use a collection of scRNAseq tools. But Loupe Browser does allow for some optimzxation with out leaving the GUI. 
+A lot of the time there are issues with the QC that need to be remedied. Most of the time this will require taking the data into R/Python to use a collection of scRNAseq tools. But Loupe Browser does allow for some optimization with out leaving the GUI. 
 
-The *Reanlyze* tab allows you access to custom filtering of low quality cells, clustering and dimension reduction. 
+The *Reanalyze* tab allows you access to custom filtering of low quality cells, clustering and dimension reduction. 
 
 ---
 ## Review Barcodes
 
 The first step is to review the barcodes. This allows you to filter cells that you think are bad or unnecessary, based on whatever criteria. 
 
-You can supply the barcodes you want to filter as a *.csv* or you could filter based on the groups you have made. For example if you knew you were not interested in the T-cell portion of the cells than we can filter them out. Domain-specific knowledge is important for this decision making. Whatever groups are selected on the cluster pane are included, so we ccan deselect the Clusters 1, 6 and 12. 
+You can supply the barcodes you want to filter as a *.csv* or you could filter based on the groups you have made. For example if you knew you were not interested in the T-cell portion of the cells than we can filter them out. Domain-specific knowledge is important for this decision making. Whatever groups are selected on the cluster pane are included, so we can deselect the Clusters 1, 6 and 12. 
 
+
+---
+## Review Barcodes
 
 ![overview](./imgs/tcell_filter.png)
 
@@ -676,7 +700,7 @@ This is a human data set, so we can select the Human genome. There is also mouse
 ---
 ## Mitochondrial UMI thresholds
 
-We often start with a 10% cut-off (1% for snRNAseq), but if you are seeing a lot of ambientRNA you may have to be flexible around this. 
+We often start with a 10% cut-off (1% for snRNAseq), but if you are seeing a lot of ambient RNA you may have to be flexible around this. 
 
 
 ![overview](./imgs/mt_filter.png)
@@ -686,7 +710,7 @@ We often start with a 10% cut-off (1% for snRNAseq), but if you are seeing a lot
 
 Lastly, we can decide on some of the outputs. This includes what dimension reduction to perform. So far we have just looked at tSNE, but actually UMAPs are the most popular. 
 
-You can customize some of the options used in the dimension reduction by adjusting the parameters. This allows you to control PCA, tSNE and UMAP. Generally though it is best to stick to the defualt unless you know what you're doing. 
+You can customize some of the options used in the dimension reduction by adjusting the parameters. This allows you to control PCA, tSNE and UMAP. Generally though it is best to stick to the default unless you know what you're doing. 
 
 Once the analysis is given a name, we can then click *Recluster*. This may take a few minutes. 
 
