@@ -62,7 +62,7 @@ if(params$isSlides == "yes"){
 
 
 
-## ----out.width = "70%", echo=F------------------------------------------------
+## ----out.width = "60%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/bad_cluster.png")
 
 
@@ -148,8 +148,16 @@ if(params$isSlides == "yes"){
 
 
 
-## ----out.width = "70%", echo=F------------------------------------------------
+## ----out.width = "60%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/min.png")
+
+
+## ----out.width = "60%", echo=F------------------------------------------------
+knitr::include_graphics("./imgs/savebar.png")
+
+
+## ----out.width = "60%", echo=F------------------------------------------------
+knitr::include_graphics("./imgs/freehand2.png")
 
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
