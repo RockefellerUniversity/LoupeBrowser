@@ -41,7 +41,12 @@ if(params$isSlides != "yes"){
 ## Overview
 
 - [Course Home Page](http://rockefelleruniversity.github.io/LoupeBrowser/)
-- [Running Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/presentations/singlepage/Session1.html#Cell_Ranger3)
+- [Clustering](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Clustering)
+- [Differential Expression](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Diffential_Expression)
+- [Features](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Features)
+- [Custom Groups](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Custom_Groups6)
+- [Reanalyze](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Reanalyze)
+- [Import/Export](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#ImportExport)
 
 ---
 ## Course materials
