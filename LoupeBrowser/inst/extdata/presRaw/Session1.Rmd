@@ -1,5 +1,5 @@
 ---
-title: "My Course Template, Session 1 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+title: "Loupe Browser, Session 1 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 author: "Rockefeller University, Bioinformatics Resource Centre"
 date: "http://rockefelleruniversity.github.io/RU_course_template/"
 output: 
@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides != "yes"){
-  cat("# ???My Course name (session1)???
+  cat("# Loupe Browser
 
 ---
 "    
@@ -40,85 +40,28 @@ if(params$isSlides != "yes"){
 
 ## Overview
 
-??We often put an overview slide that links to the various parts of the course content to make it easy to navigate i.e. this one for intro to r??
-
-- [Set up](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#set-up)
-- [Background to R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#background-to-r)
-- [Data types in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#data_types_in_r)
-- [Reading and writing in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#reading-and-writing-data-in-r)
-
----
-```{r, results='asis',include=TRUE,echo=FALSE}
-if(params$isSlides == "yes"){
-  cat("class: inverse, center, middle
-
-# Set Up
-
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
-
----
-"    
-  )
-}else{
-  cat("# Set Up
-
----
-"    
-  )
-  
-}
-
-```
+- [Course Home Page](http://rockefelleruniversity.github.io/LoupeBrowser/)
+- [Running Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/presentations/singlepage/Session1.html#Cell_Ranger3)
 
 ## Materials
 
-??We try to denote each major section of content with these title slides (see above for set up). The hierarchy will help with the different versions of the teaching content i.e. slides and single page.??
+Links to material and slides for this course can be found on github.
 
-?? Materials just gives the links to download the package Just ensure links are up to date??
-
-All prerequisites, links to material and slides for this course can be found on github.
-
-* [Intro_To_R_1](https://rockefelleruniversity.github.io/Intro_To_R_1Day/)
+* [Loupe Browser](https://rockefelleruniversity.github.io/LoupeBrowser/)
 
 Or can be downloaded as a zip archive from here.
 
-* [Download zip](https://github.com/rockefelleruniversity/Intro_To_R_1Day/zipball/master)
+* [Download zip](https://github.com/rockefelleruniversity/LoupeBrowser/zipball/master)
 
 ---
 ## Course materials
 
-?? this slide just shows where thye can get the course content from the download. You do not need to populate these directories. It will be made during compilation??
-
-Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+Once the zip file in unarchived. All presentations as HTML slides and pages will be available in the directories underneath.
 
 * **r_course/presentations/slides/**
 Presentations as an HTML slide show.
 * **r_course/presentations/singlepage/** 
 Presentations as an HTML single page.
-* **r_course/presentations/r_code/**
-R code in presentations.
-* **r_course/exercises/**
-Practicals as HTML pages. 
-* **r_course/answers/**
-Practicals with answers as HTML pages and R code solutions. 
-
-
----
-## Set the Working directory
-
-
-Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
-
-You may navigate to the unarchived RU_Course_help folder in the Rstudio menu.
-
-**Session -> Set Working Directory -> Choose Directory**
-
-or in the console.
-
-```{r setwd_introtoR,eval=F} 
-setwd("/PathToMyDownload/RU_Course_template/r_course")
-# e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
-```
 
 
 ---
@@ -126,7 +69,7 @@ setwd("/PathToMyDownload/RU_Course_template/r_course")
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Another section header
+# 10X scRNAseq datasets
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -134,7 +77,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Another section header
+  cat("# 10X scRNAseq datasets
 
 ---
 "    
@@ -144,50 +87,480 @@ if(params$isSlides == "yes"){
 
 ```
 
-## Slide Structure
+## Sample Prep
 
-We use the a double has/pound for slides. This is important for hierarchy. If you use 1 it will work for the slides, but will mess up the single page version.
+There are several single cell sequencing technologies. The most common is from 10X Genomics.
+
+![overview](./imgs/drops.png)
 
 
-## Left/Right alignment
+---
+## A scRNAseq workflow
 
-To show things side by side on a slide you can use pull left/right. t is important to keep the tab on the second square bracket. On single page it will just be one after the other:
+We often need many tools across several computational languages to [analyze these complex experiments](https://rockefelleruniversity.github.io/SingleCell_Bootcamp/). Deciding what is appropriate often depends on the data set and its QC metrics. Our first step is nearly always to run Cell Ranger. 
+![overview](./imgs/advancedworkflow.png)
+
+
+---
+## .cloupe file
+
+The product of this QC report, count matrices for downstream analysis and a Loupe file. The *.cloupe* extension denotes the Loupe file; a specialized file which can be opened by Loupe Browser.
+
+---
+## Loupe Browser
+
+Loupe Browser is a visualization and analysis software for scRNAseq. It plays a key role in exploratory analysis and QC.
+
+From scRNAseq we can ID QC issues
+review clustering
+subset
+differntials
+etc
+
+
+---
+## Install Loupe Browser
+
+Loupe Browser can be installed from the [Loupe Browser website](https://www.10xgenomics.com/support/software/loupe-browser/downloads). The current version is 8, though most older versions are still [available](https://www.10xgenomics.com/support/software/loupe-browser/downloads/previous-versions).
+
+---
+## Opening Loupe Browser
+
+When we open Loupe Browser we are greeted by a Home page. 
+
+![overview](./imgs/home.png)
+
+---
+## Opening Loupe Browser
+
+When we open Loupe Browser we are greeted by a Home page. 
+
+![overview](./imgs/home2.png)
+
+
+---
+## Opening Loupe Browser
+
+When we open Loupe Browser we are greeted by a Home page.
+
+- *Center*
+* Tutorial Files - Contains several example data sets.
+* Recent Files - Contains prior used data sets. 
+
+- *Top Right*
+* Open Loupe Files - Open a *.cloupe* file you have locally
+
+- *Left*
+* Documentation and Tutorials - Guides for using the browser
+* Public Datasets - 10X's repository of datasets
+
+---
+## Lets start
+
+We will start out using the data set for AML in the **Tutorial Files** section. This data set is from 3 donors. 2 healthy bone marrow samples and 1 from a patient with AML. There are 8,414 cells. 
+
+Zheng, G., Terry, J., Belgrader, P. et al. Massively parallel digital transcriptional profiling of single cells. Nat Commun 8, 14049 (2017). [https://doi.org/10.1038/ncomms14049](https://www.nature.com/articles/ncomms14049)
+
+---
+## Panels
+
+The data will take a few seconds to load in and then we can see our data and the main control panels.
 
 .pull-left[
-This will be on left of slide
-  ] 
+- View (Our Data) [Middle]
+- Projections [Top]
+- Toolbar [Left]
+- Differential Expression [Bottom Right]
+  ]
   
 .pull-right[
-This will be on right
 
- ]
+![overview](./imgs/screen.png)
 
+  ]
 
-## Data from external sources
+---
+## Data and Projections
 
-everything in the rmd is relative to the inst/extdata directory so you have some data to load in, just put it in the data directory, read it in along the path. 
-The structure is maintained for those attending the course and download the package using the instructions. The same rules are followed for imgs and scripts that you may call.
-```{r,echo=T}
-Table <- read.table("data/readThisTable.csv",sep=",",header=T)
+By default our data is shown as a t-SNE. This is a popular type of Dimension Reduction. This simplifies our very complex highly dimensional data into a 2D space. In this space each dot is a cell and the local relationship between cells is preserved.
+
+* We can Zoom in using the Zoom icon [Bottom left]. 
+* We can drag and drop to navigate around
+* We can alter the dot size using projection settings [Top]
+* We can hide most of the UI with *corner square* button [Top]
+
+---
+## Toolbar
+
+Bulk of the activities we will want to do is contained within the left toolbar.
+
+.pull-left[
+* Clusters
+* Features
+* Reanalyze
+* Advanced Selection
+* V(D)J Clonotypes
+* Search for Features
+  ]
+  
+.pull-right[
+
+![overview](./imgs/screen2.png)
+
+  ]
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Clustering
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Clustering
+  
+---
+"    
+  )
+  
+}
 
 ```
 
-## Big Processes
+  
+---
+## Clustering
 
-If what you want to do is super intense computationally you can use the eval=F arguments to prevent it being done during compilation.
+Lets start with clustering. Cell Ranger does some basic clustering for you. It performs clustering in two ways:
 
-```{r,echo=T, eval=F}
-#Intense computation
-myresult<-10^6 +1
+- Graph-Based
+- K-means
+
+The cells are colored by the Graph-Based clustering method be default. We can use the toolbar to switch easily between the two. 
+
+![overview](./imgs/screen3.png)
+
+
+---
+## Graph-Based vs K-means
+
+- Graph-based: This is built on relationship between cells, grouping cells together based on a nearest-neighbor model.
+
+- K-means: This assigns cells to a cluster based on their distance to a pre-determined number of cluster centres. This typically leads to round clusters. 
+
+Generally graph-based is better for identifying more complex spatial patterns. K-means is typically simpler.
+
+
+---
+## Clustering
+
+All clusters are shown. We can focus on just a few quite easily by clicking on the check box. We can also edit color and name by clicking on the *three dots*. 
+
+![overview](./imgs/subclust.png)
+
+---
+## Clustering
+
+Alternatively, we can use the split view to help clarify the distribution of the different plots.
+
+![overview](./imgs/splitclust.png)
+
+---
+## Clustering and QC
+
+This is our first chance to really assess the quality of our data. 
+
+We are looking for clearly defined clusters. For this we need easily distinguishable groups of cells that have classified correctly into clusters.
+
+We don't want an inkblot with indistinguishable/overlapping cluster assignments. 
+
+![overview](./imgs/clust_down.png)
+
+---
+## Clustering
+
+You can download the cluster information easily by clicking the download button. This gives you a table containing every Cell Barcode and the cluster it is assigned to. This is a *.csv* file which can be opened in Excel/Numbers/Sheets or by Python/R.
+
+
+
+![overview](./imgs/clust_down.png)
+
+---
+## Custom Groups
+
+This data has several custom markers associated with it: AMLStatus and LibraryID.
+
+We can also check the distribution of these identities across our tSNE in much the same way we can review the clusters. 
+
+---
+## Adding Custom Markers
+
+We can add our own groups. We can do this in two ways. 
+
+1) Upload a file *.csv* containing Cell Barcodes and group information.
+  - If you downlaod the course material there is an example files in: *LoupeBrowser/r_course/data/smoke_status_metadata.csv*
+
+2) Manually create rules to create groups in Loupe Browser (we will show you this later)
+
+![overview](./imgs/custom_Group.png)
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Diffential Expression
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Diffential Expression
+  
+---
+"    
+  )
+  
+}
 
 ```
 
-You can then just load in the result of the computation, and keep using the result after that. If you do want them to evaluate the intense computation, then you can hide this intermediate file that you are loading in with echo=F. 
 
-```{r,echo=F, eval=T}
-load("data/myresult.RData")
+---
+## Diffential Expression
+
+We can also get differential expression results from our analysis. This can be another important step in the QC of our data and start to provide insight into the biological findings. 
+
+The are various ways we can use the differential analysis:
+
+- Markers
+- Pairwise Comparisons
+- Pseudobulk
+
+
+---
+## Markers
+
+By default differential gene expression is calculated for each cluster. It does this by comparing each cluster to everything else using an exact negative binomial test.
+
+The result are a set of marker genes for that cluster. 
+
+We can view the results as a Feature Table or a Heatmap.
+
+In this case we can see markers like CD3D, IL32, CD3E up-regulated in Clusters 1, 6 and 12, suggesting they are some kind of Immune Cells.
+
+---
+## Markers
+
+![overview](./imgs/heat.png)
+
+---
+## Pairwise Comparisons
+
+Once we have some understanding of our data we may want to start do some specific comparison between clusters i.e. Cluster 1 vs Cluster 6, or use some of the group information i.e. AMLstatus.
+
+Let's look at Cluster 1 vs Cluster 6. To do this we select just those clusters.
+
+
+---
+## Pairwise Comparisons
+
+Once we have some understanding of our data we may want to start do some specific comparison between clusters i.e. Cluster 1 vs Cluster 6, or use some of the group information i.e. AMLstatus.
+
+Let's look at Cluster 1 vs Cluster 6. To do this we select just those clusters and click *Run Differential* then *Between Selected Clusters*.
+
+![overview](./imgs/heat.png)
+
+---
+## Pairwise Comparisons
+
+Again we can review results as a Feature Table or a Heatmap. This has some interesting results. There are several RPS and RPL genes. These are associated with the Ribosome and could be a sign of QC issues. 
+
+We want to keep an eye out for problem gene families like mtRNA and rRNA as they could be symptomatic of technical issues with the data. We will come back to this. 
+
+![overview](./imgs/diff.png)
+
+---
+## Psuedobulk
+
+The last method is only applicable if you have replicates. Pseudobulk leverages your replicates and aggregates the information across cells to allow a more traditional bulk RNAseq statistical determination. 
+
+A pseudobulk approach can help deal with noise and variability scRNAseq and negate some of the overpowering you can have with the high n of cells. 
+
+Though not the best experimental design, we can run pseudobulk on this dataset as we have 2 control samples (even though we only have 1 AML).
+
+Let's start by clicking *Run Differential* then *Across Multiple Samples*.
+
+---
+## Psuedobulk
+
+A separate window will pop up. We will then provide our differential design.
+
+1) Select our group. This will be the subset of cells that you want to focus your differential on i.e. Cluster 1. We can run it on all our clusters at once. 
+
+2) Experimental comparison. What do you want to compare? In this case we will look at AML status. We can then select which will be A or B in our comparison. We will pick patient as A; traditionally perturbations are used as the numerator for fold change comparisons. 
+
+3) Select samples. We will just include all our samples. 
+
+---
+## Psuedobulk
+
+When we review the heatmap we can see Cluster 14 has a lot of changes (typically the loss of expression). We can also see a few genes very up-regulated. We can see in Cluster 2 HBG1 and HBG2 which are known to be involved in AML. 
+
+![overview](./imgs/heat2.png)
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Features
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Features
+  
+---
+"    
+  )
+  
+}
 
 ```
+
+
+## Features
+
+Once we have reviewed our clusters we may next want to check the distribution of expression of specific genes or features. This can useful for several reasons:
+
+* Check QC markers - i.e. mtRNA or rRNAs
+* Check cluster markers
+* Check differential results
+* Check genes of interest
+
+All we have to do is click on the *Feature* panel and type in our gene of interest. 
+
+---
+## QC Features
+
+Here we check the ribosomal small subunit RPS4Y1. There is clear asymmetric distribution of expression. This would be a red flag, but AML is known to have abnormal expression of ribosomal subunits.
+
+
+
+![overview](./imgs/ribo2.png)
+
+---
+## QC Features
+
+We can also check which clusters are gene is expressed in by going down to the differential expression panel and clicking on *Expression Distribution*. This shows us violin plots, broken down into whatever groups we have selected in the Cluster panel. 
+
+![overview](./imgs/violin.png)
+
+---
+## Cluster Features
+We can check our cluster specific features. Earlier we saw CD3D as a top cluster marker. 
+
+![overview](./imgs/cd3d.png)
+
+
+---
+## Differential Features
+Likewise we can follow up with our differential results. Lets look at HBG2.
+
+![overview](./imgs/hbg2.png)
+
+---
+## Custom Features
+NPM1 is a well known gene which is often mutant in AML.
+
+![overview](./imgs/npm1.png)
+
+---
+## Customise Feature Plot
+
+We can customize the feature plot a lot using the tool panel in the top right. 
+
+We can alter the scale/transformation of the counts, color scheme and add filters. We can also export cells that express our gene into custom groups (more on that soon).
+
+
+![overview](./imgs/tool.png)
+
+---
+## Feature Lists
+
+The genes we have looked at have been automatically added to a gene list. We can generate several of these list, rename them or modify them easily in Loupe Browser. Alternatively we can export/import them.
+
+![overview](./imgs/lists.png)
+
+---
+## Multiple Feature Lists
+
+If you have multiple gene lists you can start to parse out complex interactions by making a co-expression plot. This shows the distribution of multiple gnee lists across your tSNE. 
+
+![overview](./imgs/coexp.png)
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Custom Groups
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Custom Groups
+  
+---
+"    
+  )
+  
+}
+
+```
+
+---
+## Working with your ow files?
+
+- selection
+- advance selection
+- reanalyze
+
+
+- Basic intro to cellranger  - waht has already ahppened to the data at a minumum. and cloupe files
+- Where do we get that data? - LoupeR for exporting from R. Very limited demo.
+- Reading in data - in built/public databases and own 
+- Import projections - https://support.10xgenomics.com/single-cell-gene-expression/software/visualization/latest/tutorial-interoperability
+- Exporting images
+ 
+
+- Limitations - i.e. same level of control.
+* cant look at levels easily of aggregated features like mt. 
+* other tools we use: doublets, cell cyle, regression, trajecotry, integrating multiple samples
+
+- Extensions - spatial and vdj explorer. 
+
+- exerciseses
+  * load in a previously annoteated dataset. 
+  * try a freah dattaset. give some amrkers and get them to run clustering? annotate? differnetials. 
+
+
 
 --
 ## Exercises
