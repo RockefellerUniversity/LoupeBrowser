@@ -62,6 +62,10 @@ if(params$isSlides == "yes"){
 
 
 
+## ----out.width = "70%"--------------------------------------------------------
+knitr::include_graphics("./imgs/custom_Group.png")
+
+
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
@@ -106,6 +110,14 @@ if(params$isSlides == "yes"){
 
 
 
+## ----out.width = "70%"--------------------------------------------------------
+knitr::include_graphics("./imgs/coexp.png")
+
+
+## ----out.width = "70%"--------------------------------------------------------
+knitr::include_graphics("./imgs/cross_comparison.png")
+
+
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
@@ -126,6 +138,10 @@ if(params$isSlides == "yes"){
   
 }
 
+
+
+## ----out.width = "70%"--------------------------------------------------------
+knitr::include_graphics("./imgs/min.png")
 
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
