@@ -106,17 +106,19 @@ We often need many tools across several computational languages to [analyze thes
 
 The product of this QC report, count matrices for downstream analysis and a Loupe file. The *.cloupe* extension denotes the Loupe file; a specialized file which can be opened by Loupe Browser.
 
+At this point the sequenced reads have been mapped to genes and empty/bad droplets have been filtered out.
+
+
 ---
 ## Loupe Browser
 
-Loupe Browser is a visualization and analysis software for scRNAseq. It plays a key role in exploratory analysis and QC.
+Loupe Browser is a visualization and analysis software for scRNAseq. It plays a key role in exploratory analysis and QC allowing us to:
 
-From scRNAseq we can ID QC issues
-review clustering
-subset
-differntials
-etc
-
+* Check QC markers
+* Review clustering
+* Check marker genes
+* Run differentials
+* Subset the data
 
 ---
 ## Install Loupe Browser
@@ -508,9 +510,18 @@ The genes we have looked at have been automatically added to a gene list. We can
 ---
 ## Multiple Feature Lists
 
-If you have multiple gene lists you can start to parse out complex interactions by making a co-expression plot. This shows the distribution of multiple gnee lists across your tSNE. 
+If you have multiple gene lists you can start to parse out complex interactions by making a co-expression plot. This shows the distribution of multiple gene lists across your tSNE. 
 
 ![overview](./imgs/coexp.png)
+
+---
+## Feature Plot
+
+We can also cross-reference individual genes in a similar way by looking at the Feature Plot. This is hidden in the Projection Type selection drop down. 
+
+We can use this to find sub populations of cells dependent on multiple markers for example: CD8+ T-cells. These will have CD3D and CD8 expression. We can also subset the cells just to clusters 1, 6 and 12 to help focus on these cells. 
+
+![overview](./imgs/cross_comparison.png)
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -535,8 +546,7 @@ if(params$isSlides == "yes"){
 
 ```
 
-##
-Custom Groups
+## Custom Groups
 
 So far we have shown you how to make custom groups by importing gene lists into Loupe Browser. We can also create custom groups while in Loupe Browser. 
 
@@ -567,7 +577,7 @@ Lets try to add more cell types of interest to our *Annotation* group. Lets star
 ---
 ##  Save Barcodes
 
-Several clusters seem to correspond to fibroblasts. We could use our threshold filtering to select these cells or we could instead use point and click selection using the *Freehand Selection* tool. Lets start by grabbing one of these clusters. 
+Several clusters seem to correspond to fibroblasts. We could use our threshold filtering to select these cells or we could instead use point and click selection using the *Freehand Selection* tool. There is also a *Draw Selection* depending on your preference. Lets start by grabbing one of these clusters. 
 
 
 ![overview](./imgs/savebar.png)
@@ -578,7 +588,6 @@ Several clusters seem to correspond to fibroblasts. We could use our threshold f
 We can add a selection to an existing group, so lets use *Freehand Selection* again to highlight the other major fibroblast group. 
 
 ![overview](./imgs/savebar.png)
-
 
 ---
 ## Custom Groups
@@ -690,53 +699,113 @@ All our prior work is preserved but now we have some additional projections, inc
 
 
 ---
-## Working with your ow files?
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Import/Export
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Import/Export
+  
+---
+"    
+  )
+  
+}
+
+```
 
 
+## Working with your own files
 
-- Basic intro to cellranger  - waht has already ahppened to the data at a minumum. and cloupe files
-- Where do we get that data? - LoupeR for exporting from R. Very limited demo.
-- Reading in data - in built/public databases and own 
-- Import projections - https://support.10xgenomics.com/single-cell-gene-expression/software/visualization/latest/tutorial-interoperability
-- Exporting images
- 
+Thus far we have been working with some demo data. As mentioned we can get Loupe files from our own experiments (or public data) when we run Cell Ranger. This will take FastQ files as an input. 
 
-- Limitations - i.e. same level of control.
-* cant look at levels easily of aggregated features like mt. 
-* other tools we use: doublets, cell cyle, regression, trajecotry, integrating multiple samples
+Alternatively, we can use publicly accessible loupe files from the 10X website or other sources. These will have to be downloaded. 
 
-- Extensions - spatial and vdj explorer. 
+Once we have the files we simply open a new Loupe Browser file session and then click *Open Loupe File* and find the downloaded file. 
 
-- exerciseses
-  * load in a previously annoteated dataset. 
-  * try a freah dattaset. give some amrkers and get them to run clustering? annotate? differnetials. 
+---
+## Working with your own files
+
+Unfortunately, most repositories do not require loupe files to be submitted with data sets i.e. GEO. That said, often an R object like *.rds* files, are submitted. 
+
+There is a package called [loupeR](https://www.10xgenomics.com/support/software/loupe-browser/latest/tutorials/introduction/lb-louper) from 10X which can convert a Seurat object from R into a loupe file. You can include in the export a variety of Group IDs as well, so any annotation that has been added can also be exported. 
+
+This makes it really easy to go from more advanced bioinformatic tools to a much more user friendly Loupe Browser.
+
+---
+## loupeR
+
+A quick piece of example code:
+
+```{r, eval=F}
+library(loupeR)
+
+create_loupe_from_seurat(seu_obj, 
+                         output_dir = "loupe", 
+                         output_name = "scRNA_annotated_Igfilter")
+```
+
+---
+## loupeR
+
+When you import it will look like this, with all the inherited categories.
+
+
+![overview](./imgs/louper_ex.png)
+
+
+---
+## loupeR
+
+Unfortunately there is not an equivalent utility for Python, but it is relatively straightforward to export from Scanpy, read into R and then export again into Loupe Browser. 
+
+Alternatively, you can import all aspects of a data set into Loupe Browser individually. We have already seen how to import Group and Feature lists. You can also import projections. By using the "..." next to *Projection Type*.  
+
+---
+## Export and Saving
+
+The analysis you perform in Loupe Browser can easily be saved. When you click *File* > *Save* the loupe file you are working with is updated. Making it easy to come back to the work or share it with others. 
+
+You can also save any of the gene lists, group information or differential results by clicking on export buttons next to each of those panels.
+
+Lastly, you can export high res SVG files (similar to PDF) of your t-SNE/UMAP. These files can be read into Illustrator/Inkscape. 
+
+
+---
+## Summary
+
+Hopefully we have shown you that you can complete a number of task with relative ease in Loupe Browser:
+
+* Check QC markers
+* Review clustering
+* Check marker genes
+* Run differentials
+* Subset the data
+
+---
+## Limitations
+
+* There is less controls of parameters i.e. clustering
+* There are not the same tools available i.e. doublets, ambient correction, annotation
+* Reproducibility is harder to maintain as it is a GUI
+
+![overview](./imgs/advancedworkflow.png)
+
 
 ---
 ## Time for an exercise!
 
-??? exercise description here?? [here](../../exercises/exercises/MyExercise1_exercises.html)
+Exercises found [here](../../exercises/exercises/MyExercise1_exercises.html)
 
 ---
 ## Answers to exercise
 
 Answers can be found [here](../../exercises/answers/MyExercise1_answers.html)
 
-R code for solutions can be found [here](../../exercises/answers/MyExercise1_answers.R)
-
-## Exercise again
-
-So we can have some more sections here describing some new important topic
-
-Then more exercises
-
----
-## Time for an exercise!
-
-??? exercise description here?? [here](../../exercises/exercises/MyExercise2_exercises.html)
-
----
-## Answers to exercise
-
-Answers can be found [here](../../exercises/answers/MyExercise2_answers.html)
-
-R code for solutions can be found [here](../../exercises/answers/MyExercise2_answers.R)
