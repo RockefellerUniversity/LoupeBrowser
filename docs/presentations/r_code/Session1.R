@@ -6,9 +6,9 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides != "yes"){
-  cat("# ???My Course name (session1)???
+  cat("# Loupe Browser
 
 ---
 "    
@@ -18,11 +18,11 @@ if(params$isSlides != "yes"){
 
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Set Up
+# 10X scRNAseq datasets
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -30,7 +30,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Set Up
+  cat("# 10X scRNAseq datasets
 
 ---
 "    
@@ -40,16 +40,11 @@ if(params$isSlides == "yes"){
 
 
 
-## ----setwd_introtoR,eval=F----------------------------------------------------
-## setwd("/PathToMyDownload/RU_Course_template/r_course")
-## # e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
-
-
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Another section header
+# Clustering
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -57,8 +52,8 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Another section header
-
+  cat("# Clustering
+  
 ---
 "    
   )
@@ -67,18 +62,120 @@ if(params$isSlides == "yes"){
 
 
 
-## ----echo=T-------------------------------------------------------------------
-Table <- read.table("data/readThisTable.csv",sep=",",header=T)
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Diffential Expression
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Diffential Expression
+  
+---
+"    
+  )
+  
+}
 
 
 
-## ----echo=T, eval=F-----------------------------------------------------------
-## #Intense computation
-## myresult<-10^6 +1
-## 
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Features
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Features
+  
+---
+"    
+  )
+  
+}
 
 
-## ----echo=F, eval=T-----------------------------------------------------------
-load("data/myresult.RData")
 
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Custom Groups
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Custom Groups
+  
+---
+"    
+  )
+  
+}
+
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Reanalyze
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Reanalyze
+  
+---
+"    
+  )
+  
+}
+
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Import/Export
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Import/Export
+  
+---
+"    
+  )
+  
+}
+
+
+
+## ----eval=F-------------------------------------------------------------------
+# library(loupeR)
+# 
+# create_loupe_from_seurat(seu_obj,
+#                          output_dir = "loupe",
+#                          output_name = "scRNA_annotated_Igfilter")
 
