@@ -1,9 +1,11 @@
 <br>
 
-#### **?? My course name?? , Session 1**
+#### **Loupe Browser , Session 1**
 
-??What am I focusing on in this section. Bullet point lists are good??
+This session will show you how to:
 
-* Course content
-* Building courses
-* Making it look nice
+* Check QC markers
+* Review clustering
+* Check marker genes
+* Run differentials
+* Subset the data
