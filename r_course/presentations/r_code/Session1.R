@@ -62,7 +62,7 @@ if(params$isSlides == "yes"){
 
 
 
-## ----out.width = "70%"--------------------------------------------------------
+## ----out.width = "70%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/custom_Group.png")
 
 
@@ -110,11 +110,11 @@ if(params$isSlides == "yes"){
 
 
 
-## ----out.width = "70%"--------------------------------------------------------
+## ----out.width = "70%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/coexp.png")
 
 
-## ----out.width = "70%"--------------------------------------------------------
+## ----out.width = "70%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/cross_comparison.png")
 
 
@@ -140,7 +140,7 @@ if(params$isSlides == "yes"){
 
 
 
-## ----out.width = "70%"--------------------------------------------------------
+## ----out.width = "70%", echo=F------------------------------------------------
 knitr::include_graphics("./imgs/min.png")
 
 

@@ -1,0 +1,8 @@
+List,Name,ID,FeatureType
+RBCs,HBA1,ENSG00000206172,Gene Expression
+Basophil,FCER1A,ENSG00000179639,Gene Expression
+T Cells,CD3E,ENSG00000198851,Gene Expression
+Macrophage,C1QA,ENSG00000173372,Gene Expression
+DCs/Monocytes,LY6G6C,ENSG00000204421,Gene Expression
+NK Cells,NKG7,ENSG00000105374,Gene Expression
+B Cells,CD79A,ENSG00000105369,Gene Expression
