@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 name: OS-check
 
@@ -121,7 +121,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install package
-        if: github.ref == 'refs/heads/main' 
+        if: github.ref == 'refs/heads/master' 
         run: |
           devtools::install("LoupeBrowser/",dependencies = TRUE,quick = TRUE)
         shell: Rscript {0}
@@ -129,7 +129,7 @@ jobs:
       - name: CompileCourse
         run: |
           require(compileCourses)
-          compileCourses::compileSingleCourseMaterial(repo="RockefellerUniversity",subdir="LoupeBrowser",branch="main")
+          compileCourses::compileSingleCourseMaterial(repo="RockefellerUniversity",subdir="LoupeBrowser",branch="master")
         shell: Rscript {0}
 
       - name: Upload check results
