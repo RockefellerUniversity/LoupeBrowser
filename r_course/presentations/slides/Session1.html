@@ -37,7 +37,12 @@ class: center, middle, inverse, title-slide
 ## Overview
 
 - [Course Home Page](http://rockefelleruniversity.github.io/LoupeBrowser/)
-- [Running Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/presentations/singlepage/Session1.html#Cell_Ranger3)
+- [Clustering](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Clustering)
+- [Differential Expression](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Diffential_Expression)
+- [Features](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Features)
+- [Custom Groups](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Custom_Groups6)
+- [Reanalyze](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#Reanalyze)
+- [Import/Export](https://rockefelleruniversity.github.io/LoupeBrowser/presentations/singlepage/Session1.html#ImportExport)
 
 ---
 ## Course materials
@@ -251,7 +256,7 @@ We are looking for clearly defined clusters. For this we need easily distinguish
 
 We don't want an inkblot with indistinguishable/overlapping cluster assignments. 
 
-&lt;img src="./imgs/bad_cluster.png" width="70%" /&gt;
+&lt;img src="./imgs/bad_cluster.png" width="60%" /&gt;
 
 ---
 ## Clustering
@@ -361,7 +366,7 @@ Though not the best experimental design, we can run pseudobulk on this dataset a
 Let's start by clicking *Run Differential* then *Across Multiple Samples*.
 
 ---
-## Psuedobulk
+## Pseudobulk
 
 A separate window will pop up. We will then provide our differential design.
 
@@ -372,14 +377,14 @@ A separate window will pop up. We will then provide our differential design.
 3) Select samples. We will just include all our samples. 
 
 ---
-## Psuedobulk
+## Pseudobulk
 
 
 
 ![overview](./imgs/pseudo.png)
 
 ---
-## Psuedobulk
+## Pseudobulk
 
 When we review the heatmap we can see Cluster 14 has a lot of changes (typically the loss of expression). We can also see a few genes very up-regulated. We can see in Cluster 2 HBG1 and HBG2 which are known to be involved in AML. 
 
@@ -495,7 +500,7 @@ We have seen allusions to this while looking at filtering of Features based on e
 Let's filter CD3D based on a minimum expression value of 1.5.
 
 
-&lt;img src="./imgs/min.png" width="70%" /&gt;
+&lt;img src="./imgs/min.png" width="60%" /&gt;
 
 ---
 ## Save Barcodes
@@ -505,7 +510,8 @@ After we have filtered our cells we can then save these barcodes. To save them w
  - *Add to new Group*: What is the type of labeling we are doing? i.e. Annotation
 
 
-![overview](./imgs/savebar.png)
+&lt;img src="./imgs/savebar.png" width="60%" /&gt;
+
 
 ---
 ## Save Barcodes
@@ -527,7 +533,8 @@ Several clusters seem to correspond to fibroblasts. We could use our threshold f
 
 We can add a selection to an existing group, so lets use *Freehand Selection* again to highlight the other major fibroblast group. 
 
-![overview](./imgs/freehand2.png)
+&lt;img src="./imgs/freehand2.png" width="60%" /&gt;
+
 
 ---
 ## Custom Groups
